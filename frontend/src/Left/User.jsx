@@ -1,7 +1,9 @@
 import React from 'react'
 
-function User() {
+function User({user }) {
+
   return (
+    user?<>
     <div className='flex space-x-4 px-6 py-7 hover:bg-slate-800 duration-200 rounded-md'>
         <div className="avatar online">
   <div className="mask mask-squircle w-16">
@@ -10,14 +12,15 @@ function User() {
 </div>
     <div>
         <h1 className='flex font-extrabold'>
-            Shubham Malviya
+            {user.fullname}
         </h1>
 
         <h5 className='text-gray-500' >
-            We all grow together........
+            {user.Email}
         </h5>
     </div>
     </div>
+    </>:<></>
   )
 }
 

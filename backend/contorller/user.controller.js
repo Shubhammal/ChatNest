@@ -49,7 +49,7 @@ export const Login = async(req, res) =>{
         if(!isMatch){
             return res.status(400).json({message:"the password is wrong"});
         }
-        createTokenandCookies(User._id, res);
+        createTokenandCookies(checkEmail._id, res);
         res.status(200).json({message:"the token is generated",User:{
             _id : checkEmail._id,
             fullname : checkEmail.fullname,
@@ -72,3 +72,23 @@ export const logout = async(req, res)=>{
         res.status(501).json({message:"Check whether server problem"});
     }
 }
+
+export const getAllUsers = async (req, res) => {
+    try {
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ message: "Unauthorized user" });
+        }
+
+        const LogInUser = req.user._id;
+
+        const allUsers = await User.find({ _id: { $ne: LogInUser } }).select("-Password");
+
+        res.status(200).json({
+            message: "All users retrieved successfully",
+            allUsers,
+        });
+    } catch (error) {
+        console.log("Error in getting all users: " + error);
+        res.status(500).json({ message: "Server error while fetching users" });
+    }
+};
