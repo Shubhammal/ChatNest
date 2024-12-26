@@ -7,6 +7,7 @@ import Signup from './Component/Signup'
 import Login from './Component/Login'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router";
 import { userAuth } from './context/AuthProvider'
+import Loading from './Component/Loading'
 
 function App() {
  
@@ -28,7 +29,7 @@ function App() {
         <Route path='/login' element={authUser? <Navigate to= {'/'}/> : <Login/>}/>
         <Route path='/signup' element={authUser? <Navigate to= {'/'}/> :<Signup/>}/>
     </Routes>
-    
+    {/* <Loading/> */}
     </>
   )
 }

@@ -73,22 +73,16 @@ export const logout = async(req, res)=>{
     }
 }
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async(req, res)=>{
     try {
-        if (!req.user || !req.user._id) {
+          if (!req.user || !req.user._id) {
             return res.status(401).json({ message: "Unauthorized user" });
         }
-
         const LogInUser = req.user._id;
-
-        const allUsers = await User.find({ _id: { $ne: LogInUser } }).select("-Password");
-
-        res.status(200).json({
-            message: "All users retrieved successfully",
-            allUsers,
-        });
-    } catch (error) {
-        console.log("Error in getting all users: " + error);
-        res.status(500).json({ message: "Server error while fetching users" });
+        const allUser = await User.find({_id:{$ne:LogInUser}}).select("-Password");
+        res.status(201).json({allUser});
+        } catch (error) {
+        console.log("Error in getting All User" + error);
+        res.status(502).json({message:"check in Getting All Users"});
     }
-};
+}

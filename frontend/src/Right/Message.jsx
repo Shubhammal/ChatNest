@@ -1,32 +1,26 @@
 import React from 'react'
 
-function Message() {
+function Message({message}) {
+  const authUser = JSON.parse(localStorage.getItem('message'));
+  console.log(message);
+  const senderCheck = authUser.User._id === message.senderId;
+  console.log(senderCheck);
+  
   return (
     <div className='p-4 '>
+
+    {senderCheck?<>
      <div className="chat chat-end">
   <div className="chat-bubble chat-bubble-accent">
-    Did you get Msg....?
+    {message.message}
   </div>
   </div>
-
+  </>:<>
   <div className="chat chat-start">
   <div className="chat-bubble chat-bubble-info">
-    Yes.. bruh! i get it ....
+    {message.message}
   </div>
-  </div>
-
-
-  <div className="chat chat-end">
-  <div className="chat-bubble chat-bubble-accent">
-    Did you get Msg....?
-  </div>
-  </div>
-
-  <div className="chat chat-start">
-  <div className="chat-bubble chat-bubble-info">
-    Yes.. bruh! i get it ....
-  </div>
-  </div>
+  </div></>}
     </div>
   )
 }
