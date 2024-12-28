@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios"
 import { userAuth } from '../context/AuthProvider';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 function Signup() {
         const [authUser, setAuthUser] = userAuth();
@@ -24,7 +25,7 @@ function Signup() {
             .then((res)=>{
                 console.log(res.data);
                 if(res.data){
-                    alert("Login Succefully");
+                    toast.success("Login Succefully");
                 }
                 localStorage.setItem("message", JSON.stringify(res.data));
                 setAuthUser(res.data);
@@ -32,10 +33,10 @@ function Signup() {
             .catch((error)=>{
                 console.log(error);
                 if(error.response){
-                    alert("Error:"+ error.response.data.message);
+                    toast.alert("Error:"+ error.response.data.message);
                 }else {
                     console.error("Unexpected Error: ", error);
-                    alert("An unexpected error occurred");
+                    toast.alert("An unexpected error occurred");
                 }
             })
         } 

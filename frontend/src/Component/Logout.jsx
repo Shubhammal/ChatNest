@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { IoIosLogOut } from "react-icons/io";
 import  Cookies  from 'js-cookie';
 import { Navigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
  export default function Logout() {
   const [loading ,setLoading] = useState(false);
@@ -13,8 +14,8 @@ import { Navigate } from 'react-router-dom';
       localStorage.removeItem("message");
       Cookies.remove("jwt");
       setLoading(false);
-      alert("logout successfully");
-      return <Navigate to={'api/user/login'}/>
+      toast.success("logout successfully");
+      return ()=><Navigate to={'api/user/login'}/>
     } catch (error) {
       console.log(error);
     }

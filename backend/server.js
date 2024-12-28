@@ -5,11 +5,12 @@ import userRoute from './route/user.route.js'
 import messageRoute from './route/message.route.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser';
+import {app, server} from './SocketIo/server.js'
 
 
 
 
-const app = express()
+// const app = express()
 dotenv.config()
 const PORT =process.env.PORT || 5005;
 const URL = process.env.MONGOOSE_URL;
@@ -20,9 +21,9 @@ app.use(cookieParser());
 
 
 
-app.get('/',(req, res)=>{
-    res.send("the data had come or not??...");
-})
+// app.get('/',(req, res)=>{
+//     res.send("the data had come or not??...");
+// })
 
 try {
     mongoose.connect(URL)
@@ -34,6 +35,6 @@ try {
 app.use('/api/user', userRoute);
 app.use('/api/message', messageRoute);
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`App listening on port ${PORT}`)
 }) 

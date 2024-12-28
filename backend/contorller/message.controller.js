@@ -1,6 +1,7 @@
 import express from 'express';
 import Conversation from '../models/conversational.model.js';
 import Message from '../models/message.model.js';
+import { getReceiverSocketId, io } from '../SocketIo/server.js';
 
 export const sendMessage = async (req, res) => {
     try {
@@ -32,8 +33,13 @@ export const sendMessage = async (req, res) => {
 
         // Save both the message and conversation
         await Promise.all([conversation.save(), newMessage.save()]);
+        const receiverSocketId = getReceiverSocketId(newMessage.receiverId);
+        if(receiverSocketId){
+            io.to(receiverSocketId).emit("newMessage",newMessage);
+            // res.status(201).json({mesg:"value is updated" + receiverSocketId});
+        } 
 
-        res.status(202).json({ message: "Message sent successfully", newMessage });
+        // res.status(202).json({ message: "Message sent successfully", newMessage });
     } catch (error) {
         console.error("Error in sending message: ", error);
         res.status(500).json({ message: "Internal server problem in sending message" });

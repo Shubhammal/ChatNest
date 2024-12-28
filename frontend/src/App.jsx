@@ -5,9 +5,10 @@ import Left from './Left/Left'
 import Right from './Right/Right'
 import Signup from './Component/Signup'
 import Login from './Component/Login'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import { userAuth } from './context/AuthProvider'
 import Loading from './Component/Loading'
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
  
@@ -26,12 +27,14 @@ function App() {
      :
      <Navigate to={'/login'}/>
         }/>
-        <Route path='/login' element={authUser? <Navigate to= {'/'}/> : <Login/>}/>
-        <Route path='/signup' element={authUser? <Navigate to= {'/'}/> :<Signup/>}/>
+        <Route path='/login' element={authUser? <Navigate to= '/'/> : <Login/>}/>
+        <Route path='/signup' element={authUser? <Navigate to= '/'/> :<Signup/>}/>
     </Routes>
     {/* <Loading/> */}
+
+    <Toaster/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios"
 import { userAuth } from '../context/AuthProvider';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 function Login() {
@@ -18,16 +19,16 @@ function Login() {
     .then((res)=>{
         console.log(res.data);
         if(res.data){
-            alert("Login Succefully");
+            toast.success("Login Succefully");
         }
         localStorage.setItem("message", JSON.stringify(res.data));
         setAuthUser(res.data);
     }).catch((error) =>{
         if(error.response){
-            alert("Error:"+ error.response.data.message);
+            toast.error("Error:"+ error.response.data.message);
         }else {
             console.error("Unexpected Error: ", error);
-            alert("An unexpected error occurred");
+            toast.error("An unexpected error occurred");
         }
     });
   }
