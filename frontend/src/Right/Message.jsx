@@ -1,9 +1,9 @@
 import React from "react";
 
 function Message({ message }) {
+  console.log("authUser");
   const authUser = JSON.parse(localStorage.getItem("message"));
-  const senderCheck = message.senderId === authUser?.User?._id;
-  console.log(authUser);
+  const senderCheck = message.senderId === authUser?.User?._id || message.isSender;
   
 
   const createdAt = new Date(message.createdAt);

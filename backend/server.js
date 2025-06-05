@@ -25,6 +25,7 @@ app.use(cookieParser());
 //     res.send("the data had come or not??...");
 // })
 
+
 try {
     mongoose.connect(URL)
     console.log("Mongoose is connected ");

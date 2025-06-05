@@ -14,7 +14,6 @@ function User({user }) {
     user?<>
     <div className={`hover:bg-slate-600 duration-300 ${isSelected?"bg-stone-800":""}`}
     onClick={()=>setSelectedConversation({...user},
-      console.log("clicked the onClick", selectedConversation)
     )}>
     <div className='flex space-x-4 px-6 py-7 hover:bg-slate-800 duration-200 rounded-md'>
         <div className={`avatar ${isOnline}`}>

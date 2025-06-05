@@ -33,13 +33,23 @@ export const sendMessage = async (req, res) => {
 
         // Save both the message and conversation
         await Promise.all([conversation.save(), newMessage.save()]);
-        const receiverSocketId = getReceiverSocketId(newMessage.receiverId);
+        console.log("doesnt it reciever_id "+receiver_id);
+        const receiverSocketId = getReceiverSocketId(receiver_id);
+        console.log("receiverSocketId Checking??....")
+        console.log(receiverSocketId)
+        
         if(receiverSocketId){
-            io.to(receiverSocketId).emit("newMessage",newMessage);
+
+            io.to(receiverSocketId).emit('newMessage',newMessage);
+            console.log("checking i m in receiverSocketId in msgcontroller");
+            
+            console.log(newMessage);
+            
             // res.status(201).json({mesg:"value is updated" + receiverSocketId});
         } 
 
-        // res.status(202).json({ message: "Message sent successfully", newMessage });
+        res.status(202);
+
     } catch (error) {
         console.error("Error in sending message: ", error);
         res.status(500).json({ message: "Internal server problem in sending message" });

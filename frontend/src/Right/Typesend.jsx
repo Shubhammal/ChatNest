@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import { IoIosSend } from "react-icons/io";
 import useSendMessage from '../context/stateMangement/useSendMessage.js';
+import Message from './Message.jsx';
 
-function Typesend() {
+function Typesend({ onNewMessage }) {
   const [message, setMessage] = useState("");
   const { loading, sendMessage } = useSendMessage();
 
-
   const handleSubmit = async (e) => {
-    console.log(message);
     e.preventDefault();
-    await sendMessage(message);
+    onNewMessage(message);
+    let temp = message;
     setMessage("");
-  }
+    await sendMessage(temp);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
