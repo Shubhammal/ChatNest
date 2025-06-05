@@ -8,7 +8,7 @@ export default defineConfig({
     port:5100,
     proxy:{
       '/api':{
-        target:'http://localhost:5002',
+        target:'https://chatnest-2-qy6e.onrender.com',
         changeOrigin:true,
       }
     }
